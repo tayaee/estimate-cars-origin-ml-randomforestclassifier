@@ -10,7 +10,7 @@ st.set_page_config(page_title="Car Origin Prediction", layout="wide")
 
 st.title("Car Origin Prediction")
 st.markdown(
-    "Random Forest Classifier prediction. Adjust parameters for instant results. Find code [here](https://github.com/tayaee/estimate-cars-origin-ml-randomforestclassifier)"
+    "Predict Car Origin using RandomForestClassifier. Adjust parameters for instant results. Find code [here](https://github.com/tayaee/estimate-cars-origin-ml-randomforestclassifier)"
 )
 
 
