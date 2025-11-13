@@ -124,7 +124,15 @@ feature_importance_df = pd.DataFrame({"Feature": feature_names, "Importance": im
 )
 
 fig_imp, ax_imp = plt.subplots(figsize=(10, 6))
-sns.barplot(x="Importance", y="Feature", data=feature_importance_df, palette="magma", ax=ax_imp)
+sns.barplot(
+    x="Importance",
+    y="Feature",
+    data=feature_importance_df,
+    palette="magma",
+    hue="Feature",
+    legend=False,
+    ax=ax_imp,
+)
 ax_imp.set_title("Feature Importance", fontsize=16)
 ax_imp.set_xlabel("Importance", fontsize=12)
 ax_imp.set_ylabel("Feature", fontsize=12)
