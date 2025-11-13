@@ -69,9 +69,7 @@ def train_and_predict(
         n_jobs=-1,
     )
     rforest.fit(X_train, y_train)
-
     y_pred_test = rforest.predict(X_test)
-
     return y_pred_test, rforest
 
 
@@ -86,7 +84,6 @@ selected_class_weight = st.sidebar.selectbox(
     options=["None", "balanced", "balanced_subsample"],
     index=0,
 )
-
 class_weight_param = None if selected_class_weight == "None" else selected_class_weight
 
 st.sidebar.markdown("---")
@@ -115,7 +112,6 @@ col1, col2, col3, col4 = st.columns(4)
 
 accuracy = accuracy_score(y_test, y_pred_test)
 col1.metric("Accuracy", f"{accuracy:.4f}")
-
 col2.metric("Precision (Macro)", f"{report['macro avg']['precision']:.4f}")
 col3.metric("Recall (Macro)", f"{report['macro avg']['recall']:.4f}")
 col4.metric("F1-Score (Macro)", f"{report['macro avg']['f1-score']:.4f}")
