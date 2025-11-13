@@ -4,7 +4,6 @@ import seaborn as sns
 import streamlit as st
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.model_selection import train_test_split
 
 st.set_page_config(page_title="Car Origin Prediction", layout="wide")
 
@@ -19,12 +18,14 @@ st.markdown(
 @st.cache_data
 def load_and_preprocess_data():
     try:
-        df = pd.read_csv("data/train.csv")
+        df_train = pd.read_csv("data/train.csv")
+        df_test = pd.read_csv("data/test.csv")
     except FileNotFoundError:
         st.error("Data file not found.")
         return None, None, None, None, None, None
 
-    df = df.dropna()
+    df_train = df_train.dropna()
+    df_test = df_test.dropna()
 
     feature_names = [
         "mpg",
@@ -35,13 +36,21 @@ def load_and_preprocess_data():
         "acceleration",
         "model year",
     ]
-    X = df[feature_names]
-    y = df["origin"]
 
-    X_encoded = pd.get_dummies(X, columns=["model year"], dtype=float)
+    X_train = df_train[feature_names]
+    y_train = df_train["origin"]
 
-    X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.3, random_state=1)
-    return X_train, X_test, y_train, y_test, X_encoded.columns, y.unique()
+    X_test = df_test[feature_names]
+    y_test = df_test["origin"]
+
+    # Encode both train and test data consistently
+    X_train_encoded = pd.get_dummies(X_train, columns=["model year"], dtype=float)
+    X_test_encoded = pd.get_dummies(X_test, columns=["model year"], dtype=float)
+
+    # Ensure both train and test have the same columns
+    X_train_encoded, X_test_encoded = X_train_encoded.align(X_test_encoded, join='outer', axis=1, fill_value=0)
+
+    return X_train_encoded, X_test_encoded, y_train, y_test, X_train_encoded.columns, y_train.unique()
 
 
 y_test: pd.Series
