@@ -9,7 +9,9 @@ from sklearn.model_selection import train_test_split
 st.set_page_config(page_title="Car Origin Prediction", layout="wide")
 
 st.title("Car Origin Prediction")
-st.markdown("Random Forest Classifier prediction. Adjust parameters for instant results.")
+st.markdown(
+    "Random Forest Classifier prediction. Adjust parameters for instant results. Find code <a href='https://github.com/tayaee/estimate-cars-origin-ml-randomforestclassifier'>here</a>"
+)
 
 
 @st.cache_data
@@ -93,8 +95,6 @@ st.sidebar.write(f"- `max_features`: {selected_max_features}")
 st.sidebar.write(f"- `min_samples_leaf`: {selected_min_samples_leaf}")
 st.sidebar.write(f"- `min_samples_split`: {selected_min_samples_split}")
 st.sidebar.write(f"- `class_weight`: {selected_class_weight}")
-
-st.info("Training and evaluating model...")
 
 y_pred_test, model = train_and_predict(
     X_train,
