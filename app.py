@@ -10,8 +10,8 @@ st.set_page_config(page_title="Car Origin Prediction", layout="wide")
 
 st.title("Car Origin Prediction")
 st.markdown(
-    "Predict Car Origin using RandomForestClassifier. " \
-    "Adjust parameters for instant results. " \
+    "Predict Car Origin using RandomForestClassifier. "
+    "Adjust parameters for instant results. "
     "Find code [here](https://github.com/tayaee/estimate-cars-origin-ml-randomforestclassifier)."
 )
 
@@ -19,7 +19,7 @@ st.markdown(
 @st.cache_data
 def load_and_preprocess_data():
     try:
-        df = pd.read_csv("data/cars.csv")
+        df = pd.read_csv("data/train.csv")
     except FileNotFoundError:
         st.error("Data file not found.")
         return None, None, None, None, None, None
